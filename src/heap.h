@@ -1222,7 +1222,7 @@ class Heap {
   Object** roots_array_start() { return roots_; }
 
   Address* store_buffer_top_address() {
-    return reinterpret_cast<Address*>(&roots_[kStoreBufferTopRootIndex]);
+      return (Address *)(void *)(&roots_[kStoreBufferTopRootIndex]);
   }
 
   // Get address of global contexts list for serialization support.
