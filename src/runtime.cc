@@ -659,12 +659,12 @@ static void ArrayBufferWeakCallback(v8::Isolate* external_isolate,
   Handle<JSArrayBuffer> array_buffer(JSArrayBuffer::cast(*internal_object));
 
   if (!array_buffer->is_external()) {
-    size_t allocated_length = NumberToSize(
+      const size_t allocated_length = NumberToSize(
         isolate, array_buffer->byte_length());
     isolate->heap()->AdjustAmountOfExternalAllocatedMemory(
         -static_cast<intptr_t>(allocated_length));
     CHECK(V8::ArrayBufferAllocator() != NULL);
-    V8::ArrayBufferAllocator()->Free(data);
+    V8::ArrayBufferAllocator()->Free(data, allocated_length);
   }
   object->Dispose(external_isolate);
 }

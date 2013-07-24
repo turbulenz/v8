@@ -2374,7 +2374,7 @@ class V8EXPORT ArrayBuffer : public Object {
      * Free the memory pointed to |data|. That memory is guaranteed to be
      * previously allocated by |Allocate|.
      */
-    virtual void Free(void* data) = 0;
+    virtual void Free(void* data, size_t length) = 0;
   };
 
   /**
