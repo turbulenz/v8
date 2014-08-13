@@ -2964,6 +2964,7 @@ THREADED_TEST(ArrayBuffer_ApiInternalToExternal) {
   Local<v8::ArrayBuffer> ab = v8::ArrayBuffer::New(isolate, 1024);
   CheckInternalFieldsAreZero(ab);
   CHECK_EQ(1024, static_cast<int>(ab->ByteLength()));
+  CHECK_NE(0, ab->BaseAddress());
   CHECK(!ab->IsExternal());
   CcTest::heap()->CollectAllGarbage(i::Heap::kNoGCFlags);
 
@@ -2973,6 +2974,7 @@ THREADED_TEST(ArrayBuffer_ApiInternalToExternal) {
   CHECK_EQ(1024, static_cast<int>(ab_contents.ByteLength()));
   uint8_t* data = static_cast<uint8_t*>(ab_contents.Data());
   ASSERT(data != NULL);
+  CHECK_EQ(data, ab->BaseAddress());
   env->Global()->Set(v8_str("ab"), ab);
 
   v8::Handle<v8::Value> result = CompileRun("ab.byteLength");
