@@ -5926,6 +5926,12 @@ size_t v8::ArrayBuffer::ByteLength() const {
 }
 
 
+void *v8::ArrayBuffer::BaseAddress() {
+  i::Handle<i::JSArrayBuffer> obj = Utils::OpenHandle(this);
+  return obj->backing_store();
+}
+
+
 Local<ArrayBuffer> v8::ArrayBuffer::New(Isolate* isolate, size_t byte_length) {
   i::Isolate* i_isolate = reinterpret_cast<i::Isolate*>(isolate);
   EnsureInitializedForIsolate(i_isolate, "v8::ArrayBuffer::New(size_t)");
