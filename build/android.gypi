@@ -43,27 +43,27 @@
       ['android_ndk_root==""', {
         'variables': {
           'android_sysroot': '<(android_toolchain)/sysroot/',
-          'android_stlport': '<(android_toolchain)/sources/cxx-stl/stlport/',
+          'android_stl': '<(android_toolchain)/sources/cxx-stl/gnu-libstdc++',
         },
         'android_include': '<(android_sysroot)/usr/include',
         'android_lib': '<(android_sysroot)/usr/lib',
-        'android_stlport_include': '<(android_stlport)/stlport',
-        'android_stlport_libs': '<(android_stlport)/libs',
+        'android_stl_include': '<(android_stl)/4.8/include <(android_stl)/4.8/libs/armeabi-v7a/include',
+        'android_stl_libs': '<(android_stl)/4.8/libs',
       }, {
         'variables': {
           'android_sysroot': '<(android_ndk_root)/platforms/android-<(android_target_platform)/arch-<(android_target_arch)',
-          'android_stlport': '<(android_ndk_root)/sources/cxx-stl/stlport/',
+          'android_stl': '<(android_ndk_root)/sources/cxx-stl/gnu-libstdc++/',
         },
         'android_include': '<(android_sysroot)/usr/include',
         'android_lib': '<(android_sysroot)/usr/lib',
-        'android_stlport_include': '<(android_stlport)/stlport',
-        'android_stlport_libs': '<(android_stlport)/libs',
+        'android_stl_include': '<(android_stl)/4.8/include -I<(android_stl)/4.8/libs/armeabi-v7a/include',
+        'android_stl_libs': '<(android_stl)/4.8/libs',
       }],
     ],
     # Enable to use the system stlport, otherwise statically
     # link the NDK one?
     'use_system_stlport%': '<(android_webview_build)',
-    'android_stlport_library': 'stlport_static',
+    'android_stl_library': 'gnustl_static',
     # Copy it out one scope.
     'android_webview_build%': '<(android_webview_build)',
   },  # variables
@@ -102,7 +102,7 @@
         'defines': [
           'ANDROID',
           #'__GNU_SOURCE=1',  # Necessary for clone()
-          'USE_STLPORT=1',
+          # 'USE_STLPORT=1',
           '_STLP_USE_PTR_SPECIALIZATIONS=1',
           'HAVE_OFF64_T',
           'HAVE_SYS_UIO_H',
@@ -124,7 +124,7 @@
             '-lpthread', '-lnss3', '-lnssutil3', '-lsmime3', '-lplds4', '-lplc4', '-lnspr4',
           ],
           'libraries': [
-            '-l<(android_stlport_library)',
+            '-l<(android_stl_library)',
             # Manually link the libgcc.a that the cross compiler uses.
             '<!($CC -print-libgcc-file-name)',
             '-lc',
@@ -160,37 +160,37 @@
           # The include ordering here is important; change with caution.
           ['use_system_stlport==0', {
             'cflags': [
-              '-I<(android_stlport_include)',
+              '-I<(android_stl_include)',
             ],
             'conditions': [
               ['target_arch=="arm" and arm_version==7', {
                 'ldflags': [
-                  '-L<(android_stlport_libs)/armeabi-v7a',
+                  '-L<(android_stl_libs)/armeabi-v7a',
                 ],
               }],
               ['target_arch=="arm" and arm_version < 7', {
                 'ldflags': [
-                  '-L<(android_stlport_libs)/armeabi',
+                  '-L<(android_stl_libs)/armeabi',
                 ],
               }],
               ['target_arch=="mipsel"', {
                 'ldflags': [
-                  '-L<(android_stlport_libs)/mips',
+                  '-L<(android_stl_libs)/mips',
                 ],
               }],
               ['target_arch=="ia32" or target_arch=="x87"', {
                 'ldflags': [
-                  '-L<(android_stlport_libs)/x86',
+                  '-L<(android_stl_libs)/x86',
                 ],
               }],
               ['target_arch=="x64"', {
                 'ldflags': [
-                  '-L<(android_stlport_libs)/x86_64',
+                  '-L<(android_stl_libs)/x86_64',
                 ],
               }],
               ['target_arch=="arm64"', {
                 'ldflags': [
-                  '-L<(android_stlport_libs)/arm64-v8a',
+                  '-L<(android_stl_libs)/arm64-v8a',
                 ],
               }],
             ],
