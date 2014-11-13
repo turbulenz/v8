@@ -522,7 +522,9 @@
               ['component=="shared_library"', {
                 'RuntimeLibrary': '3',  # /MDd
               }, {
-                'RuntimeLibrary': '1',  # /MTd
+                # Always link against MDd
+                'RuntimeLibrary': '3',  # /MDd
+                # 'RuntimeLibrary': '1',  # /MTd
               }],
             ],
           },
@@ -567,7 +569,8 @@
               ['component=="shared_library"', {
                 'RuntimeLibrary': '3',  # /MDd
               }, {
-                'RuntimeLibrary': '1',  # /MTd
+                'RuntimeLibrary': '3',  # /MDd
+                # 'RuntimeLibrary': '1',  # /MTd
               }],
             ],
           },
@@ -621,7 +624,8 @@
               ['component=="shared_library"', {
                 'RuntimeLibrary': '3',  #/MDd
               }, {
-                'RuntimeLibrary': '1',  #/MTd
+                'RuntimeLibrary': '3',  #/MDd
+                # 'RuntimeLibrary': '1',  #/MTd
               }],
               ['v8_target_arch=="x64"', {
                 # TODO(2207): remove this option once the bug is fixed.
@@ -794,7 +798,8 @@
                   ['component=="shared_library"', {
                     'RuntimeLibrary': '2',  #/MD
                   }, {
-                    'RuntimeLibrary': '0',  #/MT
+                    'RuntimeLibrary': '2',  #/MD
+                    # 'RuntimeLibrary': '0',  #/MT
                   }],
                   ['v8_target_arch=="x64"', {
                     # TODO(2207): remove this option once the bug is fixed.
