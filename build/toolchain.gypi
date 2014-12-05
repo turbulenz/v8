@@ -629,7 +629,7 @@
               }],
               ['v8_target_arch=="x64"', {
                 # TODO(2207): remove this option once the bug is fixed.
-                'WholeProgramOptimization': 'true',
+                # 'WholeProgramOptimization': 'true',
               }],
             ],
           },
