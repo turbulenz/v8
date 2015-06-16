@@ -31,6 +31,7 @@
   'variables': {
     'msvs_use_common_release': 0,
     'gcc_version%': 'unknown',
+    'msvs_wpo%': 'true',
     'CXX%': '${CXX:-$(which g++)}',  # Used to assemble a shell command.
     'v8_target_arch%': '<(target_arch)',
     # Native Client builds currently use the V8 ARM JIT and
@@ -803,7 +804,7 @@
                   }],
                   ['v8_target_arch=="x64"', {
                     # TODO(2207): remove this option once the bug is fixed.
-                    'WholeProgramOptimization': 'true',
+                    'WholeProgramOptimization': '<(msvs_wpo)',
                   }],
                 ],
               },
