@@ -518,6 +518,7 @@
         'abstract': 1,
         'msvs_settings': {
           'VCCLCompilerTool': {
+            'WarnAsError': '0',
             'Optimization': '0',
             'conditions': [
               ['component=="shared_library"', {
@@ -560,6 +561,7 @@
         'abstract': 1,
         'msvs_settings': {
           'VCCLCompilerTool': {
+            'WarnAsError': '0',
             'Optimization': '1',
             'InlineFunctionExpansion': '2',
             'EnableIntrinsicFunctions': 'true',
@@ -615,6 +617,7 @@
         'abstract': 1,
         'msvs_settings': {
           'VCCLCompilerTool': {
+            'WarnAsError': '0',
             'Optimization': '2',
             'InlineFunctionExpansion': '2',
             'EnableIntrinsicFunctions': 'true',
@@ -790,6 +793,7 @@
           ['OS=="win"', {
             'msvs_settings': {
               'VCCLCompilerTool': {
+                'WarnAsError': '0',
                 'Optimization': '2',
                 'InlineFunctionExpansion': '2',
                 'EnableIntrinsicFunctions': 'true',
