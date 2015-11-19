@@ -32,6 +32,7 @@
     'msvs_use_common_release': 0,
     'gcc_version%': 'unknown',
     'msvs_wpo%': 'true',
+    'msvs_iterator_debug_level_zero%': 'false',
     'CXX%': '${CXX:-$(which g++)}',  # Used to assemble a shell command.
     'v8_target_arch%': '<(target_arch)',
     # Native Client builds currently use the V8 ARM JIT and
@@ -426,6 +427,9 @@
           'IntermediateDirectory': '$(OutDir)\\obj\\$(ProjectName)',
           'CharacterSet': '1',
         },
+      }],
+      ['msvs_iterator_debug_level_zero=="true"', {
+        'defines': [ '_ITERATOR_DEBUG_LEVEL=0', ],
       }],
       ['OS=="win" and v8_enable_prof==1', {
         'msvs_settings': {
